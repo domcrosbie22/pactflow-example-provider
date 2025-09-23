@@ -1,11 +1,18 @@
 require('dotenv').config();
 const { Verifier } = require('@pact-foundation/pact');
 const {
-  baseOpts,
   setupServer,
   stateHandlers,
   requestFilter
 } = require('./pact.setup');
+
+const baseOpts = {
+  logLevel: "INFO",
+  providerBaseUrl: "http://localhost:8080",
+  providerVersion: process.env.GIT_COMMIT || "1.0.0", // Default to "1.0.0" if GIT_COMMIT is not set
+  providerVersionBranch: process.env.GIT_BRANCH || "main", // Default to "main" if GIT_BRANCH is not set
+  verbose: process.env.VERBOSE === "true",
+};
 
 describe('Pact Verification', () => {
   let server;
