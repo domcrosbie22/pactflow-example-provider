@@ -7,7 +7,7 @@ exports.getAll = async (req, res) => {
 };
 exports.getById = async (req, res) => {
     const product = await repository.getById(req.params.id);
-    product ? res.send(product) : res.status(404).send({message: "Product not found"})
+    product ? res.send(product) : res.status(404).send({message: "Request failed with status code 404"})
 };
 
 exports.repository = repository;
